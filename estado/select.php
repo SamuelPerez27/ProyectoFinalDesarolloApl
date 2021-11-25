@@ -13,8 +13,9 @@ $response = mysqli_query($conexion, $query);
 while($row = mysqli_fetch_array($response))
 {
   $index['id_estado'] =$row['0'];
-  $index['nombre'] = $row['1'];
-  $index['id_pais'] =$row['2'];
+  $index['codigo'] =$row['1'];
+  $index['nombre'] = $row['2'];
+  $index['id_pais'] =$row['3'];
 
   array_push($result['datos'],$index);
 }
