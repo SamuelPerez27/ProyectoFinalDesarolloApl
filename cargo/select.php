@@ -7,7 +7,7 @@ if(!$conexion){
 
 $result= array();
 $result['cargo'] =array();
-$query ="SELECT * FROM Cargo";
+$query ="SELECT * FROM cargo";
 $response = mysqli_query($conexion, $query);
 
 while($row = mysqli_fetch_array($response))
