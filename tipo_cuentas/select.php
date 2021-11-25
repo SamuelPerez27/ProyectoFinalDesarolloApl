@@ -7,7 +7,7 @@ if(!$conexion){
 
 $result= array();
 $result['datos'] =array();
-$query ="SELECT * FROM cuentas";
+$query ="SELECT * FROM tipo_cuentas";
 $response = mysqli_query($conexion, $query);
 
 while($row = mysqli_fetch_array($response))
