@@ -1,13 +1,13 @@
 <?php
 
-$conexion =mysqli_connect("localhost", "id17880816_lpilier", "iCA(CjJp)rrRKXB2","id17880816_bdcrud");
+$conexion =mysqli_connect("localhost", "id18004791_admin", "3lLid3rPili#73","id18004791_teorganizo");
 if(!$conexion){
     echo "Error de conexion";
 }
 
 $result= array();
 $result['cargo'] =array();
-$query ="SELECT * FROM cargo";
+$query ="SELECT * FROM Cargo";
 $response = mysqli_query($conexion, $query);
 
 while($row = mysqli_fetch_array($response))
