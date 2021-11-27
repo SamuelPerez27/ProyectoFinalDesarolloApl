@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 
@@ -19,9 +18,10 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation = findViewById(R.id.bottom_navigation);
 
         bottomNavigation.add(new MeowBottomNavigation.Model(1,R.drawable.ic_dinero));
-        bottomNavigation.add(new MeowBottomNavigation.Model(2,R.drawable.ic_home));
+        bottomNavigation.add(new MeowBottomNavigation.Model(2,R.drawable.ic_empleado));
         bottomNavigation.add(new MeowBottomNavigation.Model(3,R.drawable.ic_grafico_1));
-        bottomNavigation.add(new MeowBottomNavigation.Model(4,R.drawable.ic_configuracion));
+        bottomNavigation.add(new MeowBottomNavigation.Model(4,R.drawable.ic_cliente));
+        bottomNavigation.add(new MeowBottomNavigation.Model(5,R.drawable.ic_configuracion));
 
         bottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
             @Override
@@ -32,20 +32,24 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new MoneyFragment();
                         break;
                     case 2:
-                        fragment = new HomeFragment();
+                        fragment = new EmpleadoFragment();
                         break;
                     case 3:
                         fragment = new GraficoFragment();
                         break;
                     case 4:
+                        fragment = new ClienteFragment();
+                        break;
+                    case 5:
                         fragment = new ConfiguracionFragment();
+                        break;
                 }
                 loadFragment(fragment);
             }
         });
 
 
-        bottomNavigation.show(2,true);
+        bottomNavigation.show(3,true);
 
         bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
             @Override

@@ -28,7 +28,7 @@ public class Login extends AppCompatActivity {
 
     EditText usuario, contraseña, nombre;
 
-    String str_usuario,str_password, str_nombre;
+    static String str_usuario,str_password, str_nombre;
     String url = "https://teorganizo1.000webhostapp.com/login/login.php";
 
     @Override
@@ -56,7 +56,7 @@ public class Login extends AppCompatActivity {
 
 
             final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setMessage("Por favor espera...");
+            progressDialog.setMessage("Accediendo...");
 
             progressDialog.show();
 
