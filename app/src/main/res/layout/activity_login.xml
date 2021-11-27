@@ -66,6 +66,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="Register"
+        android:onClick="registrar"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:layout_below="@+id/edit_btn"/>
