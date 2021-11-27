@@ -107,9 +107,11 @@ public class Login extends AppCompatActivity {
             requestQueue.add(request);
 
 
-
-
         }
     }
 
+    public void registrar(View view) {
+
+        startActivity(new Intent(getApplicationContext(), Login_registro.class));
+    }
 }
