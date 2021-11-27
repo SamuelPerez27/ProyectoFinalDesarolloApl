@@ -120,7 +120,7 @@ public class Login_registro extends AppCompatActivity {
 
     public void regresar(View view) {
 
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        startActivity(new Intent(getApplicationContext(), Login.class));
 
         //Limpiando variables
           limpiador();
@@ -166,7 +166,7 @@ public class Login_registro extends AppCompatActivity {
                     if(response.equalsIgnoreCase("datos insertados")){
 
                         limpiador();
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), Login.class));
                         Toast.makeText(Login_registro.this, "Se ha registrado la empresa correctamente" + nombreEmpresa_txt , Toast.LENGTH_SHORT).show();
                     }
                     else{
