@@ -148,7 +148,7 @@ public class Login_registro extends AppCompatActivity {
         }
         else {
             final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setMessage("Por favor espera...");
+            progressDialog.setMessage("Se esta creando la empresa, por favor espera...");
             progressDialog.show();
 
             //Tomando valores
