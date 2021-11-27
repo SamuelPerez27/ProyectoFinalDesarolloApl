@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation.add(new MeowBottomNavigation.Model(1,R.drawable.ic_dinero));
         bottomNavigation.add(new MeowBottomNavigation.Model(2,R.drawable.ic_home));
         bottomNavigation.add(new MeowBottomNavigation.Model(3,R.drawable.ic_grafico_1));
+        bottomNavigation.add(new MeowBottomNavigation.Model(4,R.drawable.ic_configuracion));
 
         bottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
             @Override
@@ -35,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 3:
                         fragment = new GraficoFragment();
+                        break;
+                    case 4:
+                        fragment = new ConfiguracionFragment();
                 }
                 loadFragment(fragment);
             }
