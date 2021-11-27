@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Login.Login">
+    tools:context=".Login.login">
     <TextView
         android:id="@+id/txt1"
         android:layout_width="wrap_content"
@@ -19,7 +19,7 @@
         android:text="Login"/>
 
     <EditText
-        android:id="@+id/titulo"
+        android:id="@+id/usuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Usuario"
@@ -27,17 +27,28 @@
         android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/descripcion"
+        android:id="@+id/nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Empresa"
+        android:inputType="text"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/contraseña"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Contraseña"
         android:inputType="text"
         android:minHeight="48dp" />
+
+
     <Button
         android:id="@+id/submit_btn"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="Entrar"
+        android:onClick="Login"
         android:layout_marginTop="40dp"
         android:layout_gravity="center"
         android:layout_below="@+id/txtRecetas"/>
