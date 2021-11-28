@@ -1,4 +1,4 @@
-package com.example.finapp;
+package com.example.finapp.empleado;
 
 import android.os.Bundle;
 
@@ -7,6 +7,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
+
+import com.example.finapp.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,6 +56,7 @@ public class EmpleadoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view =inflater.inflate(R.layout.fragment_empleado, container, false);
+        return view;
     }
 }

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.finapp.Cliente.ClienteFragment;
 import com.example.finapp.Estadisticas.GraficoFragment;
+import com.example.finapp.empleado.EmpleadoFragment;
 
 public class MainActivity extends AppCompatActivity {
 
