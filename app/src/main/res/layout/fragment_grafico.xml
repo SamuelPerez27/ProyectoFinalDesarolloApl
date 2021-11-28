@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".GraficoFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Grafico"
-        android:textSize="48sp"
-        android:textStyle="bold"
-        android:gravity="center"/>
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/barChart"
+        android:layout_width="356dp"
+        android:layout_height="248dp"
+        android:layout_margin="20dp" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/boton"
+        android:layout_width="match_parent"
+        android:layout_height="328dp"
+        android:text="HOLA"/>
+
+</LinearLayout>
