@@ -1,5 +1,6 @@
 package com.example.finapp;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,26 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
+
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.IPieDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,15 +49,8 @@ public class GraficoFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GraficoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
+
     public static GraficoFragment newInstance(String param1, String param2) {
         GraficoFragment fragment = new GraficoFragment();
         Bundle args = new Bundle();
@@ -49,16 +63,53 @@ public class GraficoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_grafico, container, false);
+        View view = inflater.inflate(R.layout.fragment_grafico, container, false);
+
+        PieChart pieChart = (PieChart) view.findViewById(R.id.barChart);
+
+        Button butto = (Button) view.findViewById(R.id.boton);
+
+
+
+        ArrayList<PieEntry> visitors = new ArrayList<>();
+        visitors.add(new PieEntry(508,"2016"));
+        visitors.add(new PieEntry(408,"2017"));
+        visitors.add(new PieEntry(208,"2018"));
+        visitors.add(new PieEntry(308,"2019"));
+
+        PieDataSet pieDataSet = new PieDataSet(visitors,"Ventas");
+        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        pieDataSet.setValueTextColor(Color.BLACK);
+        pieDataSet.setValueTextSize(26f);
+
+        PieData pieData = new PieData(pieDataSet);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.getLegend().setEnabled(false);
+        pieChart.setData(pieData);
+
+        pieChart.animate();
+
+        butto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Hola", Toast.LENGTH_SHORT).show();
+            }}
+        );
+
+        return view;
     }
 }
