@@ -4,11 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.finapp.Cliente.ClienteFragment;
+import com.example.finapp.Estadisticas.GraficoFragment;
 
 public class MainActivity extends AppCompatActivity {
 

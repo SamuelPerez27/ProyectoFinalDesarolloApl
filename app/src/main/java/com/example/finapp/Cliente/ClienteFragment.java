@@ -47,11 +47,6 @@ public class ClienteFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-<<<<<<< HEAD
-=======
-  //  cliente kk = new cliente();
-
->>>>>>> 2d8b3912555bc649d45c7a99ec270a060c88b64a
     //Variable
     TextView total_cliente;
 
@@ -101,10 +96,13 @@ public class ClienteFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_cliente, container, false);
 
         Button button= (Button) view.findViewById(R.id.butonprueba);
+        TextView kk = view.findViewById(R.id.total_cliente2);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "sdsdds", Toast.LENGTH_LONG).show();
+                kk.setText("Juan");
             }
         });
         return view;
