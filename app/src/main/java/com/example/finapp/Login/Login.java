@@ -78,7 +78,7 @@ public class Login extends AppCompatActivity {
                         Toast.makeText(Login.this, "Bienvenido" + " " + str_usuario, Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        Toast.makeText(Login.this, response, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, "Usuario o contraseña o empresa incorrectos", Toast.LENGTH_SHORT).show();
                     }
 
                 }
