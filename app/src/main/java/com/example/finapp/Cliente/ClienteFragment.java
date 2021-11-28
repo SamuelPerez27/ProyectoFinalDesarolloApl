@@ -47,7 +47,7 @@ public class ClienteFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    cliente kk = new cliente();
+  //  cliente kk = new cliente();
 
     //Variable
     TextView total_cliente;
