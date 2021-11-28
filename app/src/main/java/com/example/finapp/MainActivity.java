@@ -4,18 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.example.finapp.Cliente.ClienteFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     MeowBottomNavigation bottomNavigation;
+    ClienteFragment someFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
+
+        someFragment = new ClienteFragment();
 
         bottomNavigation.add(new MeowBottomNavigation.Model(1,R.drawable.ic_dinero));
         bottomNavigation.add(new MeowBottomNavigation.Model(2,R.drawable.ic_empleado));
@@ -72,4 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.frame_layout, fragment)
                 .commit();
     }
+
+
+
 }
