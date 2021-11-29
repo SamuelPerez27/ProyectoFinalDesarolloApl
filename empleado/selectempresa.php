@@ -7,7 +7,7 @@ if(!$conexion){
 
 $result= array();
 $result['empleado'] =array();
-$query ="SELECT * FROM empleado WHERE id_empresa=$id_empresa";
+$query ="SELECT * FROM empleado e JOIN empresa em ON e.id_empresa = em.id_empresa WHERE em.nombre='$nombre'";
 $response = mysqli_query($conexion, $query);
 
 while($row = mysqli_fetch_array($response))
