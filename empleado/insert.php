@@ -8,9 +8,11 @@ if(!$conexion){
 $cedula = $_POST['cedula'];
 $nombre = $_POST['nombre'];
 $apellido = $_POST['apellido'];
+$id_empresa = $_POST['id_empresa'];
+$id_cargo = $_POST['id_cargo'];
 
 
-$query ="INSERT INTO datos(cedula,nombre,apellido) values ('$cedula','$nombre', '$apellido')";
+$query ="INSERT INTO datos(cedula,nombre,apellido,id_empresa,id_cargo) values ('$cedula','$nombre', '$apellido', $id_empresa, $id_cargo)";
 $resultado =mysqli_query($conexion,$query);
 
 if($resultado){

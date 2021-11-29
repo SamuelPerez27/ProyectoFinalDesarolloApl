@@ -14,7 +14,7 @@ $contrasena = $_POST['contrasena'];
 $id_estado = $_POST['id_estado'];
 
 
-$query ="INSERT INTO empresas(nombre,descripcion,propietario,usuario,contrasena,id_estado) values ('$nombre','$descripcion', '$propietario', '$usuario', '$contrasena','$id_estado')";
+$query ="INSERT INTO empresas(nombre,descripcion,propietario,usuario,contrasena,id_estado) values ('$nombre','$descripcion', '$propietario', '$usuario', '$contrasena',$id_estado)";
 $resultado =mysqli_query($conexion,$query);
 
 if($resultado){

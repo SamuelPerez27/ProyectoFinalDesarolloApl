@@ -4,8 +4,8 @@ if(!$conexion){
     echo "Error de conexion";
 }
 
-$id =$_POST["id"];
-$query ="DELETE FROM empleado WHERE id='$id'";
+$id =$_POST["cedula"];
+$query ="DELETE FROM empleado WHERE id='$cedula'";
 $result=mysqli_query($conexion,$query);
 if($result){
  echo"datos eliminados correctamente";

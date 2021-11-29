@@ -16,7 +16,7 @@ $id_cliente = $_POST['id_cliente'];
 $id_tipo_cuenta = $_POST['id_tipo_cuenta'];
 
 
-$query ="INSERT INTO cuentas(nombre,id_empresa,id_metodo_pago,valor,concepto,fecha,id_cliente,id_tipo_cuenta) values ('$nombre','$id_empresa', '$id_metodo_pago', '$valor', '$concepto','$fecha', '$id_cliente', '$id_tipo_cuenta')";
+$query ="INSERT INTO cuentas(nombre,id_empresa,id_metodo_pago,valor,concepto,fecha,id_cliente,id_tipo_cuenta) values ('$nombre',$id_empresa, $id_metodo_pago, '$valor', '$concepto','$fecha', $id_cliente, $id_tipo_cuenta)";
 $resultado =mysqli_query($conexion,$query);
 
 if($resultado){

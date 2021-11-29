@@ -7,7 +7,7 @@ if(!$conexion){
 
 $result= array();
 $result['cliente'] =array();
-$query ="select sum(Id_Cliente) as 'total' from cliente";
+$query ="select sum(id_cliente) as 'total' from cliente";
 $response = mysqli_query($conexion, $query);
 
 while($row = mysqli_fetch_array($response))

@@ -6,24 +6,22 @@ if(!$conexion){
 }
 
 $result= array();
-$result['cliente'] =array();
-$query ="SELECT * FROM cliente WHERE cedula='$cedula'";
+$result['empleado'] =array();
+$query ="SELECT * FROM empleado WHERE id_empresa=$id_empresa";
 $response = mysqli_query($conexion, $query);
 
 while($row = mysqli_fetch_array($response))
 {
-  $index['id_cliente']=$row['0'];
-  $index['cedula'] =$row['1'];
-  $index['nombre'] =$row['2'];
-  $index['apellido'] =$row['3'];
-  $index['id_empresa'] =$row['4'];
+  $index['cedula'] =$row['0'];
+  $index['nombre'] =$row['1'];
+  $index['apellido'] =$row['2'];
+  $index['id_empresa'] =$row['3'];
+  $index['id_cargo'] =$row['4'];
 
-
-  array_push($result['cliente'],$index);
+  array_push($result['empleado'],$index);
 }
+
 $result["Exito"]="1";
 echo json_encode($result);
-
-
 
 ?>

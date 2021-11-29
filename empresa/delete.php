@@ -5,7 +5,7 @@ if(!$conexion){
 }
 
 $id_empresa =$_POST["id_empresa"];
-$query ="DELETE FROM empresas WHERE id_empresa = '$id_empresa'";
+$query ="DELETE FROM empresas WHERE id_empresa = $id_empresa";
 $result=mysqli_query($conexion,$query);
 if($result){
  echo"datos eliminados correctamente";

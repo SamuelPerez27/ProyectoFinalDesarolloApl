@@ -13,7 +13,7 @@ $usuario = $_POST['usuario'];
 $contrasena = $_POST['contrasena'];
 
 $query ="UPDATE empresas SET usuario = '$usuario', contrasena = '$contrasena' 
-                                                   WHERE id_empresa = '$id_empresa'";
+                                                   WHERE id_empresa = $id_empresa";
 
 $resultado =mysqli_query($conexion,$query);
 

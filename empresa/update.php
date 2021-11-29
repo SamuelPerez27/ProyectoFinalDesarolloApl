@@ -13,8 +13,8 @@ $propietario = $_POST['propietario'];
 //$contrasena = $_POST['contrasena'];
 $id_estado = $_POST['id_estado'];
 
-$query ="UPDATE empresas SET nombre = '$nombre', descripcion = '$descripcion', propietario = '$propietario', id_estado = '$id_estado'
-                                                   WHERE id_empresa = '$id_empresa'";
+$query ="UPDATE empresas SET nombre = '$nombre', descripcion = '$descripcion', propietario = '$propietario', id_estado = $id_estado
+                                                   WHERE id_empresa = $id_empresa";
 
 $resultado =mysqli_query($conexion,$query);
 

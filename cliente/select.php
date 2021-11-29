@@ -12,9 +12,11 @@ $response = mysqli_query($conexion, $query);
 
 while($row = mysqli_fetch_array($response))
 {
-  $index['cedula'] =$row['0'];
-  $index['nombre'] =$row['1'];
-  $index['apellido'] =$row['2'];
+  $index['id_cliente']=$row['0'];
+  $index['cedula'] =$row['1'];
+  $index['nombre'] =$row['2'];
+  $index['apellido'] =$row['3'];
+  $index['id_empresa'] =$row['4'];
 
 
   array_push($result['cliente'],$index);

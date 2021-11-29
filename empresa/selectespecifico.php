@@ -8,7 +8,7 @@ if(!$conexion){
 $result= array();
 $result['datos'] =array();
 $id_empresa = $_POST['id_empresa'];
-$query ="SELECT * FROM empresas WHERE id_empresa = '$id_empresa'";
+$query ="SELECT * FROM empresas WHERE nombre = '$nombre'";
 $response = mysqli_query($conexion, $query);
 
 while($row = mysqli_fetch_array($response))

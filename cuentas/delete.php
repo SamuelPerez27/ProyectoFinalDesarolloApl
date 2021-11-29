@@ -5,7 +5,7 @@ if(!$conexion){
 }
 
 $id_cuenta =$_POST["id_cuenta"];
-$query ="DELETE FROM cuentas WHERE id_cuenta = '$id_cuenta'";
+$query ="DELETE FROM cuentas WHERE id_cuenta = $id_cuenta";
 $result=mysqli_query($conexion,$query);
 if($result){
  echo"datos eliminados correctamente";

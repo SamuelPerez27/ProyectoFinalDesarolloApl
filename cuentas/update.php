@@ -17,9 +17,9 @@ $id_cliente = $_POST['id_cliente'];
 $id_tipo_cuenta = $_POST['id_tipo_cuenta'];
 
 
-$query ="UPDATE cuentas SET nombre = '$nombre', id_empresa = '$id_empresa', id_metodo_pago = '$id_metodo_pago', valor = '$valor',
-                           concepto = '$concepto',  fecha = '$fecha', id_cliente = '$id_cliente', id_tipo_cuenta = '$id_tipo_cuenta'
-                                                   WHERE id_cuenta = '$id_cuenta'";
+$query ="UPDATE cuentas SET nombre = '$nombre', id_empresa = $id_empresa, id_metodo_pago = $id_metodo_pago, valor = $valor,
+                           concepto = '$concepto',  fecha = $fecha, id_cliente = $id_cliente, id_tipo_cuenta = $id_tipo_cuenta
+                                                   WHERE id_cuenta = $id_cuenta";
 
 $resultado =mysqli_query($conexion,$query);
 

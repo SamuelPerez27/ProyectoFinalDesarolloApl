@@ -7,7 +7,7 @@ if(!$conexion){
 
 $result= array();
 $result['empleado'] =array();
-$query ="SELECT * FROM empleado WHERE cedula='$cedula'";
+$query ="SELECT * FROM empleado WHERE cedula=$cedula";
 $response = mysqli_query($conexion, $query);
 
 while($row = mysqli_fetch_array($response))
@@ -15,6 +15,8 @@ while($row = mysqli_fetch_array($response))
   $index['cedula'] =$row['0'];
   $index['nombre'] =$row['1'];
   $index['apellido'] =$row['2'];
+  $index['id_empresa'] =$row['3'];
+  $index['id_cargo'] =$row['4'];
 
 
   array_push($result['empleado'],$index);

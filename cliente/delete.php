@@ -5,7 +5,7 @@ if(!$conexion){
 }
 
 $id =$_POST["id"];
-$query ="DELETE FROM cliente WHERE id='$id'";
+$query ="DELETE FROM cliente WHERE id=$id";
 $result=mysqli_query($conexion,$query);
 if($result){
  echo"datos eliminados correctamente";

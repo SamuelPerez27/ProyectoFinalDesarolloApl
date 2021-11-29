@@ -7,8 +7,9 @@ if(!$conexion){
 $cedula = $_POST['cedula'];
 $nombre = $_POST['nombre'];
 $apellido = $_POST['apellido'];
+$id_empresa = $_POST['id_empresa'];
 
-$query ="UPDATE cliente SET cedula ='$cedula', nombre ='$nombre', apellido ='$apellido' WHERE id ='$id'";
+$query ="UPDATE cliente SET cedula ='$cedula', nombre ='$nombre', apellido =$apellido, id_empresa=$id_empresa WHERE id =$id";
 $resultado =mysqli_query($conexion,$query);
 
 if($resultado){
