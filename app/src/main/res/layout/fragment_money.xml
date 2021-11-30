@@ -1,16 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MoneyFragment">
+    android:orientation="vertical"
+    tools:context=".Cuentas.CuentasFragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="DINERO"
-        android:textSize="48sp"
+        android:id="@+id/txt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="30sp"
         android:textStyle="bold"
-        android:gravity="center"/>
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:text="Cuentas"/>
 
-</FrameLayout>
+    <Button
+        android:id="@+id/cobrar"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Gestionar cuentas por cobrar"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center"
+        android:layout_below="@+id/txtRecetas"/>
+
+    <Button
+        android:id="@+id/display_btn"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Gestionar cuentas por pagar"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_below="@+id/edit_btn"/>
+</LinearLayout>

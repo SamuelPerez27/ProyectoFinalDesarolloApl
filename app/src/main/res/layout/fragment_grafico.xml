@@ -232,19 +232,19 @@ android:layout_height="match_parent">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_dinero" />
+                    android:src="@drawable/ic_compra" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DEUDAS POR COBRAR"
+                    android:text="CLIENTE QUE MÁS HA COMPRADO:"
                     android:textAlignment="center"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$ RD 60,000"
+                    android:text="Luis Pilier"
                     android:textAlignment="center"
                     />
             </LinearLayout>
@@ -280,19 +280,19 @@ android:layout_height="match_parent">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_dinero" />
+                    android:src="@drawable/ic_venta" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DEUDAS POR COBRAR"
+                    android:text="EMPLEADO QUE MÁS VENTAS HA HECHO:"
                     android:textAlignment="center"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="$ RD 60,000"
+                    android:text="Samuel Perez"
                     android:textAlignment="center"
                     />
             </LinearLayout>
