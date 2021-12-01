@@ -10,15 +10,9 @@
         android:label="Finnapp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Finapp">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name=".Cuentas.eliminarCuentaCobrar"
-            android:exported="false" />
-        <activity
-            android:name=".Cuentas.CuentasCobrar"
-            android:exported="false" />
-        <activity
-            android:name=".Login.Login_registro"
+            android:name=".Cliente.eliminarCliente"
             android:exported="true" />
         <activity
             android:name=".Cliente.editarCliente"
@@ -32,6 +26,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Login.Login_registro"
+            android:exported="true"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="false" />
