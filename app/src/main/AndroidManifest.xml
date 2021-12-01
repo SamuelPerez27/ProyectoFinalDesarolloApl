@@ -21,7 +21,7 @@
             android:name=".Login.Login_registro"
             android:exported="true" />
         <activity
-            android:name=".Cliente.cliente"
+            android:name=".Cliente.editarCliente"
             android:exported="true" />
         <activity
             android:name=".Login.Login"
