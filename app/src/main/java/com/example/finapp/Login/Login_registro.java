@@ -202,7 +202,6 @@ public class Login_registro extends AppCompatActivity {
             RequestQueue requestQueue = Volley.newRequestQueue(Login_registro.this);
             requestQueue.add(request);
 
-
         }
     }
 

@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".Cliente.agregar_cliente"
+            android:exported="true" />
+        <activity
             android:name=".Cliente.eliminarCliente"
             android:exported="true" />
         <activity
@@ -37,7 +40,7 @@
         </activity>
         <activity
             android:name=".Login.Login_registro"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />

@@ -58,8 +58,6 @@ public class editarCliente extends AppCompatActivity {
         nombreEdit.setText(nombre);
         apellidoEdit.setText(apellido);
 
-
-
     }
 
     public void regresar(View view) {
