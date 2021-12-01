@@ -12,14 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Finapp">
         <activity
+            android:name=".Cuentas.eliminarCuentaCobrar"
+            android:exported="false" />
+        <activity
             android:name=".Cuentas.CuentasCobrar"
             android:exported="false" />
         <activity
             android:name=".Login.Login_registro"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Cliente.cliente"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Login.Login"
             android:exported="true">
