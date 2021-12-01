@@ -23,7 +23,6 @@
         <activity
             android:name=".Login.Login_registro"
             android:exported="true" />
-
         <activity
             android:name=".Login.Login"
             android:exported="true">
