@@ -17,8 +17,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.finapp.Cuentas.CuentasCobrar;
+import com.example.finapp.Cuentas.eliminarCuentaCobrar;
 import com.example.finapp.Login.Login;
 import com.example.finapp.Login.Login_registro;
+import com.example.finapp.MainActivity;
 import com.example.finapp.R;
 
 import java.util.HashMap;
@@ -58,28 +60,41 @@ public class eliminarCliente extends AppCompatActivity {
         nombreEdit.setText(nombre);
         apellidoEdit.setText(apellido);
 
-      //  cedulaEdit.setFocusable(false);
-       // nombreEdit.setFocusable(false);
-        //apellidoEdit.setFocusable(false);
+      cedulaEdit.setFocusable(false);
+       nombreEdit.setFocusable(false);
+       apellidoEdit.setFocusable(false);
 
     }
 
 
     public void regresar(View view) {
-
         Intent intent = new Intent(this, ClienteFragment.class );
         startActivity(intent);
     }
 
-    public void Eliminar(View view) {
-        StringRequest request = new StringRequest(Request.Method.POST, "https://teorganizo.000webhostapp.com/cliente/delete.php",
+
+
+
+    public void limpiador(){
+        nombreEdit.setText("");
+        apellidoEdit.setText("");
+        cedulaEdit.setText("");
+
+    }
+
+
+
+    public void deleteDataCliente(View view) {
+        delete = delete + "?id_cliente=" + id;
+        StringRequest request = new StringRequest(Request.Method.POST, delete,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
                         if(response.equalsIgnoreCase("datos eliminados correctamente")){
-                            Toast.makeText(eliminarCliente.this, "Cuanta por cobrar eliminada correctamente", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), CuentasCobrar.class));
+                            Intent volver = new Intent(eliminarCliente.this, MainActivity.class);
+                            Toast.makeText(eliminarCliente.this, "Cliente eliminado correctamente", Toast.LENGTH_SHORT).show();
+                            startActivity(volver);
 
                         }else{
                             Toast.makeText(eliminarCliente.this, "Error al eliminar", Toast.LENGTH_SHORT).show();
@@ -92,28 +107,12 @@ public class eliminarCliente extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(eliminarCliente.this, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+        }
+        );
 
-                Map<String,String> params = new HashMap<String,String>();
-                params.put("id_cuenta", id+"");
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(eliminarCliente.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(request);
 
-
-
-
     }
 
-
-    public void limpiador(){
-        nombreEdit.setText("");
-        apellidoEdit.setText("");
-        cedulaEdit.setText("");
-
-    }
 }
