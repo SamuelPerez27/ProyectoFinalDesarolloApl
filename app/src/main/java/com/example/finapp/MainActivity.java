@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.finapp.Cliente.ClienteFragment;
+import com.example.finapp.Cuentas.CuentasFragment;
 import com.example.finapp.Estadisticas.GraficoFragment;
 import com.example.finapp.empleado.EmpleadoFragment;
 
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                 Fragment fragment = null;
                 switch (item.getId()){
                     case 1:
-                        fragment = new MoneyFragment();
+                        fragment = new CuentasFragment();
                         break;
                     case 2:
                         fragment = new EmpleadoFragment();

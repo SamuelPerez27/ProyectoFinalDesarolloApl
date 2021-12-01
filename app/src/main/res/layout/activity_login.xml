@@ -52,15 +52,7 @@
         android:layout_marginTop="40dp"
         android:layout_gravity="center"
         android:layout_below="@+id/txtRecetas"/>
-    <Button
-        android:id="@+id/edit_btn"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="Entrar"
-        android:layout_marginTop="10dp"
-        android:visibility="gone"
-        android:layout_gravity="center"
-        android:layout_below="@+id/submit_btn"/>
+
     <Button
         android:id="@+id/display_btn"
         android:layout_width="300dp"

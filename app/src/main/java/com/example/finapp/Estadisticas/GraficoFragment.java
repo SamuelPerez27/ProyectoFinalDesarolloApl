@@ -69,10 +69,6 @@ public class GraficoFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
-
-
     }
 
     @Override
@@ -80,12 +76,38 @@ public class GraficoFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_grafico, container, false);
 
+
+        PieChart pieChart1 = (PieChart) view.findViewById(R.id.barChart1);
+        this.PieChartVentas(view);
+        this.PieChartGastos(view);
+        return view;
+    }
+
+    private void PieChartGastos(View view) {
+        PieChart pieChart = (PieChart) view.findViewById(R.id.barChart1);
+        ArrayList<PieEntry> visitors = new ArrayList<>();
+        visitors.add(new PieEntry(108,"2016"));
+        visitors.add(new PieEntry(110,"2017"));
+        visitors.add(new PieEntry(98,"2018"));
+        visitors.add(new PieEntry(30,"2019"));
+
+        PieDataSet pieDataSet = new PieDataSet(visitors,"Ventas");
+        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        pieDataSet.setValueTextColor(Color.BLACK);
+        pieDataSet.setValueTextSize(26f);
+
+        pieChart.setCenterText("Gastos");
+
+        PieData pieData = new PieData(pieDataSet);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.getLegend().setEnabled(false);
+        pieChart.setData(pieData);
+
+        pieChart.animate();
+    }
+
+    private void PieChartVentas(View view) {
         PieChart pieChart = (PieChart) view.findViewById(R.id.barChart);
-
-        Button butto = (Button) view.findViewById(R.id.boton);
-
-
-
         ArrayList<PieEntry> visitors = new ArrayList<>();
         visitors.add(new PieEntry(508,"2016"));
         visitors.add(new PieEntry(408,"2017"));
@@ -97,20 +119,15 @@ public class GraficoFragment extends Fragment {
         pieDataSet.setValueTextColor(Color.BLACK);
         pieDataSet.setValueTextSize(26f);
 
+        pieChart.setCenterText("Ventas");
+
         PieData pieData = new PieData(pieDataSet);
         pieChart.getDescription().setEnabled(false);
         pieChart.getLegend().setEnabled(false);
         pieChart.setData(pieData);
 
         pieChart.animate();
-
-        butto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "Hola", Toast.LENGTH_SHORT).show();
-            }}
-        );
-
-        return view;
     }
+
+
 }

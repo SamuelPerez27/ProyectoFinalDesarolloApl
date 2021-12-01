@@ -12,14 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Finapp">
         <activity
+<<<<<<< HEAD
             android:name=".Cliente.eliminarCliente"
             android:exported="true" />
         <activity
             android:name=".Cliente.editarCliente"
             android:exported="true" />
+=======
+            android:name=".Cuentas.CuentasCobrar"
+            android:exported="false" />
+>>>>>>> 1cab337b5b4e5584548744ff0b2bda4186953603
         <activity
             android:name=".Login.Login_registro"
             android:exported="true" />
+        <activity
+            android:name=".Cliente.cliente"
+            android:exported="true"></activity>
         <activity
             android:name=".Login.Login"
             android:exported="true">
