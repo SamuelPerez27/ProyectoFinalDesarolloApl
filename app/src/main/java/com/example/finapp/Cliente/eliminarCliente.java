@@ -79,7 +79,7 @@ public class eliminarCliente extends AppCompatActivity {
             public void onResponse(String response) {
                 progressDialog.dismiss();
 
-                if(response.equalsIgnoreCase("datos insertados")){
+                if(response.equalsIgnoreCase("datos eliminados")){
 
                     limpiador();
                     startActivity(new Intent(getApplicationContext(), Login.class));
@@ -103,7 +103,7 @@ public class eliminarCliente extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<String, String>();
-                params.put("id", id+"");
+                params.put("id_cliente", id+"");
 
                 return params;
 
