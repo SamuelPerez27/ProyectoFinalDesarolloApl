@@ -28,7 +28,7 @@ public class Login extends AppCompatActivity {
 
     EditText usuario, contraseña, nombre;
 
-    static String str_usuario,str_password, str_nombre;
+    public static String str_usuario,str_password, str_nombre;
     String url = "https://teorganizo1.000webhostapp.com/login/login.php";
 
     @Override
