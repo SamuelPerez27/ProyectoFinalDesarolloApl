@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".Cliente.eliminarCliente"
+            android:exported="true" />
+        <activity
             android:name=".Cliente.editarCliente"
             android:exported="true" />
         <activity

@@ -82,7 +82,7 @@ public class editarCliente extends AppCompatActivity {
         else{
 
             final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setMessage("Se esta editado la empresa, por favor espera...");
+            progressDialog.setMessage("Se esta editado el ciente, por favor espera...");
             progressDialog.show();
 
             nombre = nombreEdit.getText().toString().trim();
@@ -97,7 +97,7 @@ public class editarCliente extends AppCompatActivity {
                     if(response.equalsIgnoreCase("datos actualizados")){
 
                         limpiador();
-                        Toast.makeText(editarCliente.this, "Se ha editado la empresa correctamente", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(editarCliente.this, "Se ha editado el cliente correctamente", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getApplicationContext(), ClienteFragment.class));
 
                     }

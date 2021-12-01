@@ -297,7 +297,7 @@ public class ClienteFragment extends Fragment {
                         bundle.putString("apellido", apellido[position]);
                         bundle.putInt("id_empresa", id_empresa[position]);
 
-                        Intent intent = new Intent(getActivity(), com.example.finapp.Cliente.editarCliente.class);
+                        Intent intent = new Intent(getActivity(), com.example.finapp.Cliente.eliminarCliente.class);
                         intent.putExtra("envio", bundle);
                         startActivity(intent);
 
