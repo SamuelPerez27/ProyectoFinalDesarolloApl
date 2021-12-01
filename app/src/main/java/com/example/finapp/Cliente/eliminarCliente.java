@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.finapp.Cuentas.CuentasCobrar;
 import com.example.finapp.Login.Login;
 import com.example.finapp.Login.Login_registro;
 import com.example.finapp.R;
@@ -71,45 +72,35 @@ public class eliminarCliente extends AppCompatActivity {
     }
 
     public void Eliminar(View view) {
-       final ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Se esta eliminando el cliente, por favor espera...");
-        progressDialog.show();
-        StringRequest request = new StringRequest(Request.Method.POST, delete, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                progressDialog.dismiss();
+        StringRequest request = new StringRequest(Request.Method.POST, "https://teorganizo.000webhostapp.com/cliente/delete.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
 
-                if(response.equalsIgnoreCase("datos eliminados")){
+                        if(response.equalsIgnoreCase("datos eliminados correctamente")){
+                            Toast.makeText(eliminarCliente.this, "Cuanta por cobrar eliminada correctamente", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), CuentasCobrar.class));
 
-                    limpiador();
-                    startActivity(new Intent(getApplicationContext(), Login.class));
-                    Toast.makeText(eliminarCliente.this, "Se ha registrado el cliente correctamente" , Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(eliminarCliente.this, response, Toast.LENGTH_SHORT).show();
-                }
+                        }else{
+                            Toast.makeText(eliminarCliente.this, "Error al eliminar", Toast.LENGTH_SHORT).show();
+                        }
 
-            }
-        },new Response.ErrorListener(){
 
+                    }
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-                Toast.makeText(eliminarCliente.this, error.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(eliminarCliente.this, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        }
-
-        ){
+        }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("id_cliente", id+"");
 
+                Map<String,String> params = new HashMap<String,String>();
+                params.put("id_cuenta", id+"");
                 return params;
-
             }
         };
-
         RequestQueue requestQueue = Volley.newRequestQueue(eliminarCliente.this);
         requestQueue.add(request);
 
