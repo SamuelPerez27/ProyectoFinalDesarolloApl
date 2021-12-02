@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.finapp">
+    package="com.example.finapp" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,7 +10,13 @@
         android:label="Finnapp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".Cuentas.editar_Cuentas_Cobrar"
+            android:exported="false" />
+        <activity
+            android:name=".Cuentas.agregar_Cuentas"
+            android:exported="true" />
         <activity
             android:name=".Cliente.agregar_cliente"
             android:exported="true" />
@@ -31,16 +37,13 @@
             android:exported="true" />
         <activity
             android:name=".Login.Login"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Login.Login_registro"
-            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />

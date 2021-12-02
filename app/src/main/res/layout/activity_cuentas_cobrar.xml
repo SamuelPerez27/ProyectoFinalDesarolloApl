@@ -40,6 +40,7 @@
         android:id="@+id/buttonCrear"
         android:layout_width="332dp"
         android:layout_height="54dp"
+        android:onClick="agregarCuenta"
         android:text="Crear una cuenta por cobrar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

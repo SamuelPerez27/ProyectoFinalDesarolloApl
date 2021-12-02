@@ -128,6 +128,10 @@ public class CuentasCobrar extends AppCompatActivity {
 
     }
 
+    public void agregarCuenta(View view) {
+        startActivity(new Intent(getApplicationContext(), agregar_Cuentas.class));
+    }
+
     private class adapter extends BaseAdapter {
 
         @Override
@@ -161,29 +165,31 @@ public class CuentasCobrar extends AppCompatActivity {
             editarCuentaCobrar = convertView.findViewById(R.id.editarCuentaCobrar);
             eliminarCuentaCobrar = convertView.findViewById(R.id.eliminarCuentaCobrar);
 
-         /*   //Metodo Editar cliente
-            editarCliente.setOnClickListener(new View.OnClickListener() {
+           //Metodo Editar cliente
+            editarCuentaCobrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     try {
                         Bundle bundle = new Bundle();
-                        bundle.putInt("id", id[position]);
-                        bundle.putInt("cedula", cedula[position]);
-                        bundle.putString("nombre", nombre[position]);
-                        bundle.putString("apellido", apellido[position]);
+                        bundle.putInt("id_cuenta",  id_cuenta[position]);
                         bundle.putInt("id_empresa", id_empresa[position]);
+                        bundle.putInt("id_metodo_pago", id_metodo_pago[position]);
+                        bundle.putInt("valor", valor[position]);
+                        bundle.putString("concepto", concepto[position]);
+                        bundle.putString("fecha", fecha[position]);
+                        bundle.putInt("id_cliente", id_cliente[position]);
 
-                        Intent intent = new Intent(getActivity(), com.example.finapp.Cliente.editarCliente.class);
+                        Intent intent = new Intent(getApplicationContext(), editar_Cuentas_Cobrar.class);
                         intent.putExtra("envio", bundle);
                         startActivity(intent);
 
                     }
                     catch (Exception er){
-                        Toast.makeText(getActivity(), er.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), er.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
-*/
+
             //Metodo eliminar
             eliminarCuentaCobrar.setOnClickListener(new View.OnClickListener() {
                 @Override
