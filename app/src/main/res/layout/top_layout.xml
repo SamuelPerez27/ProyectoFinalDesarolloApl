@@ -21,7 +21,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="72dp"
                 android:layout_height="50dp"
-                android:src="@drawable/user" />
+                android:src="@drawable/worker" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -36,7 +36,7 @@
                     android:layout_weight="1"
                     android:gravity="bottom"
                     android:text="El pepe"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textStyle="bold" />
 
                 <TextView
@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Perfil / Propietario"
-                    android:textColor="@color/muted" />
+                    android:textColor="@color/white" />
             </LinearLayout>
         </LinearLayout>
 
@@ -57,6 +57,6 @@
         android:layout_gravity="center_vertical"
         android:background="@drawable/round_button"
         android:src="@drawable/question"
-        android:textColor="#fff" />
+        android:textColor="#008291" />
 
 </LinearLayout>
