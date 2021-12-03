@@ -55,11 +55,19 @@ public class CuentasFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_money, container, false);
         Button btnCobrar = (Button) view.findViewById(R.id.cobrar);
+        Button btnPagar = (Button) view.findViewById(R.id.pagar);
 
         btnCobrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), CuentasCobrar.class));
+            }
+        });
+
+        btnPagar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), CuentasPagar.class));
             }
         });
 

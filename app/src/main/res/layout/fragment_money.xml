@@ -29,7 +29,7 @@
         android:layout_below="@+id/txtRecetas"/>
 
     <Button
-        android:id="@+id/display_btn"
+        android:id="@+id/pagar"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="Gestionar cuentas por pagar"

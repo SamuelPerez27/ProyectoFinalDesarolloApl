@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.75">
 
         <AutoCompleteTextView
-            android:id="@+id/autoComplete_metodopago"
+            android:id="@+id/autoComplete_metodopagoEdit"
             android:layout_width="match_parent"
             android:layout_height="63dp"
             android:layout_weight="1"
@@ -42,7 +42,7 @@
         app:layout_constraintVertical_bias="0.555">
 
         <AutoCompleteTextView
-            android:id="@+id/autoComplete_cliente"
+            android:id="@+id/autoComplete_clienteEdit"
             android:layout_width="match_parent"
             android:layout_height="63dp"
             android:layout_weight="1"
@@ -124,7 +124,7 @@
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Agregar Cuenta"
+        android:text="Editar Cuenta"
         android:textStyle="bold"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -180,8 +180,8 @@
         android:id="@+id/button"
         android:layout_width="327dp"
         android:layout_height="43dp"
-        android:text="Crear Gasto"
-        android:onClick="editarCuenta"
+        android:text="Editar cliente"
+        android:onClick="editar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -190,6 +190,7 @@
 
     <Button
         android:id="@+id/button4"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Regresar"

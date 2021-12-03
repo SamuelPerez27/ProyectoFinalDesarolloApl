@@ -1,9 +1,6 @@
 package com.example.finapp.Cuentas;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -23,15 +20,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.finapp.Cliente.ClienteFragment;
-import com.example.finapp.MainActivity;
 import com.example.finapp.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class CuentasCobrar extends AppCompatActivity {
+public class CuentasPagar extends AppCompatActivity {
 
     //Variablidad
     ListView listviewCuentas;
@@ -41,25 +36,22 @@ public class CuentasCobrar extends AppCompatActivity {
     Button BtnCrear;
 
     // Url apis
-    String Selectcuentascorar = "https://teorganizo1.000webhostapp.com/cuentas/selectcuentascobrar.php";
+    String Selectcuentascorar = "https://teorganizo1.000webhostapp.com/cuentas/selectcuentaspagar.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cuentas_cobrar);
+        setContentView(R.layout.activity_cuentas_pagar);
 
         //Inicializar
         try {
-            listviewCuentas = findViewById(R.id.listCuentascobrar);
+            listviewCuentas = findViewById(R.id.listCuentaspagar);
         }
         catch (Exception er){
             Toast.makeText(getApplicationContext(), er.toString(), Toast.LENGTH_LONG).show();
         }
 
         select_cuentascobrar();
-
     }
-
-
     public void select_cuentascobrar(){
 
         StringRequest request_select_cuentas = new StringRequest(Request.Method.POST, Selectcuentascorar,
@@ -87,7 +79,7 @@ public class CuentasCobrar extends AppCompatActivity {
                                 nombre_tipocuenta = new String[jsonArray.length()];
 
                                 for (int i = 0; i < jsonArray.length(); i++) {
-                                  //  progressDialog.dismiss();
+                                    //  progressDialog.dismiss();
                                     JSONObject object = jsonArray.getJSONObject(i);
 
                                     id_cuenta[i] = object.getInt("id_cuenta");
@@ -104,7 +96,7 @@ public class CuentasCobrar extends AppCompatActivity {
                                     nombre_cliente[i] = object.getString("nombre_cliente");
                                     nombre_tipocuenta[i] = object.getString("nombre_tipocuenta");
 
-                                    adapter adapterclass = new adapter();
+                                    CuentasPagar.adapter adapterclass = new CuentasPagar.adapter();
                                     listviewCuentas.setAdapter(adapterclass);
                                 }
                             }
@@ -156,7 +148,7 @@ public class CuentasCobrar extends AppCompatActivity {
             TextView valortv, conceptotv, fechatv;
             Button editarCuentaCobrar, eliminarCuentaCobrar;
 
-            convertView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.cuentacobrar_template, parent, false);
+            convertView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.cuentapagar_template, parent, false);
 
             valortv = convertView.findViewById(R.id.valorCliente);
             conceptotv = convertView.findViewById(R.id.conceptoCliente);
@@ -165,7 +157,7 @@ public class CuentasCobrar extends AppCompatActivity {
             editarCuentaCobrar = convertView.findViewById(R.id.editarCuentaCobrar);
             eliminarCuentaCobrar = convertView.findViewById(R.id.eliminarCuentaCobrar);
 
-           //Metodo Editar cliente
+            //Metodo Editar cliente
             editarCuentaCobrar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
