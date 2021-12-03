@@ -27,6 +27,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.finapp.R;
 import com.example.finapp.Login.Login;
+import com.example.finapp.Tools;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +48,7 @@ public class EmpleadoFragment extends Fragment {
     ListView listViewEmpleados;
     Empleado_Modelo empleado;
     TextView usuario;
+    boolean paso = false;
 
     String selectEmpresa = "https://teorganizo1.000webhostapp.com/empleado/selectempresa.php";
 
@@ -82,9 +84,14 @@ public class EmpleadoFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_empleado, container, false);
         listViewEmpleados = view.findViewById(R.id.list_view_empleado);
-        select_empleado();
+        if (!paso){
+            select_empleado();
+            paso=true;
+        }
         usuario = view.findViewById(R.id.usuario);
         usuario.setText(Login.str_usuario);
+        Tools.setSystemBarLight(getActivity());
+        Tools.setSystemBarColor(getActivity(),R.color.white);
         return view;
     }
 
@@ -187,6 +194,27 @@ public class EmpleadoFragment extends Fragment {
             }catch (Exception er){
                 Toast.makeText(getActivity(), er.toString(), Toast.LENGTH_SHORT).show();
             }
+
+            try {
+                txt_edit.setOnClickListener(v -> {
+                    EmpleadoEditFragment empleadoEditFragment = new EmpleadoEditFragment();
+
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.frame_layout, empleadoEditFragment, "emp")
+                            .commit();
+                });
+                txt_view.setOnClickListener(v ->{
+
+                });
+                txt_delete.setOnClickListener(v->{
+
+                });
+            }catch (Exception er){
+                Toast.makeText(getActivity(), er.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+
 
             return convertView;
         }

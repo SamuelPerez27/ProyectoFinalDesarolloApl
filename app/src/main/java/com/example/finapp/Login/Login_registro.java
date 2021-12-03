@@ -21,6 +21,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.finapp.MainActivity;
 import com.example.finapp.R;
+import com.example.finapp.Tools;
 import com.example.finapp.estados.estado_clase_modelo;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -45,7 +46,7 @@ public class Login_registro extends AppCompatActivity {
     int id_estado;
 
     //URL de las API
-    String select = "https://teorganizo.000webhostapp.com/estado/select.php";
+    String select = "https://teorganizo1.000webhostapp.com/estado/select.php";
     String insert = "https://teorganizo1.000webhostapp.com/empresa/insert.php";
 
     @Override
@@ -53,6 +54,8 @@ public class Login_registro extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_registro);
+        Tools.setSystemBarLight(this);
+        Tools.setSystemBarColor(this,R.color.white);
 
         //Estableciendo variables
         modelo = new estado_clase_modelo();

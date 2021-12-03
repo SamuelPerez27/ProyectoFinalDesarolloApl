@@ -3,8 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/yellow"
+    android:id="@+id/fragment_empleado_edit"
     tools:context=".empleado.EmpleadoEditFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <include layout="@layout/top_layout" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,5 +69,12 @@
             android:id="@+id/spinnerCargo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+    </LinearLayout>
     </LinearLayout>
 </FrameLayout>
