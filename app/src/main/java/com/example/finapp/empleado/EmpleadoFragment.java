@@ -48,6 +48,7 @@ public class EmpleadoFragment extends Fragment {
     ListView listViewEmpleados;
     Empleado_Modelo empleado;
     TextView usuario;
+    ImageButton imagepregunra;
     boolean paso = false;
 
     String selectEmpresa = "https://teorganizo1.000webhostapp.com/empleado/selectempresa.php";
@@ -90,6 +91,17 @@ public class EmpleadoFragment extends Fragment {
         }
         usuario = view.findViewById(R.id.usuario);
         usuario.setText(Login.str_usuario);
+
+        imagepregunra = view.findViewById(R.id.imagepregunra);
+
+        imagepregunra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "jjj", Toast.LENGTH_LONG).show();
+            }
+        });
+        Toast.makeText(getActivity(), "HOLA", Toast.LENGTH_LONG).show();
+
         Tools.setSystemBarLight(getActivity());
         Tools.setSystemBarColor(getActivity(),R.color.white);
         return view;

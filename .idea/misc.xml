@@ -8,6 +8,7 @@
         <entry key="..\:/Users/luisc/OneDrive/Desktop/Proyecto Final/ProyectoFinalDesarolloApl/app/src/main/res/drawable/layout_bg_profile.xml" value="0.20364583333333333" />
         <entry key="..\:/Users/luisc/OneDrive/Desktop/Proyecto Final/ProyectoFinalDesarolloApl/app/src/main/res/layout/activity_agregar_cuentas.xml" value="0.3375" />
         <entry key="..\:/Users/luisc/OneDrive/Desktop/Proyecto Final/ProyectoFinalDesarolloApl/app/src/main/res/layout/activity_cuentas_cobrar.xml" value="0.3375" />
+        <entry key="..\:/Users/luisc/OneDrive/Desktop/Proyecto Final/ProyectoFinalDesarolloApl/app/src/main/res/layout/activity_cuentas_pagar.xml" value="0.2604166666666667" />
         <entry key="..\:/Users/luisc/OneDrive/Desktop/Proyecto Final/ProyectoFinalDesarolloApl/app/src/main/res/layout/activity_editar_cliente.xml" value="0.3375" />
         <entry key="..\:/Users/luisc/OneDrive/Desktop/Proyecto Final/ProyectoFinalDesarolloApl/app/src/main/res/layout/activity_editar_cuentas.xml" value="0.26313405797101447" />
         <entry key="..\:/Users/luisc/OneDrive/Desktop/Proyecto Final/ProyectoFinalDesarolloApl/app/src/main/res/layout/activity_editar_cuentas_cobrar.xml" value="0.26313405797101447" />
@@ -18,6 +19,8 @@
         <entry key="..\:/Users/luisc/OneDrive/Desktop/Proyecto Final/ProyectoFinalDesarolloApl/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/luisc/OneDrive/Desktop/Proyecto Final/ProyectoFinalDesarolloApl/app/src/main/res/layout/clientetemplate.xml" value="0.3375" />
         <entry key="..\:/Users/luisc/OneDrive/Desktop/Proyecto Final/ProyectoFinalDesarolloApl/app/src/main/res/layout/cuentacobrar_template.xml" value="0.3375" />
+        <entry key="..\:/Users/luisc/OneDrive/Desktop/Proyecto Final/ProyectoFinalDesarolloApl/app/src/main/res/layout/cuentapagar_template.xml" value="0.2586050724637681" />
+        <entry key="..\:/Users/luisc/OneDrive/Desktop/Proyecto Final/ProyectoFinalDesarolloApl/app/src/main/res/layout/cuentatemplate.xml" value="0.2604166666666667" />
         <entry key="..\:/Users/luisc/OneDrive/Desktop/Proyecto Final/ProyectoFinalDesarolloApl/app/src/main/res/layout/fragment_cliente.xml" value="0.1641337386018237" />
         <entry key="..\:/Users/luisc/OneDrive/Desktop/Proyecto Final/ProyectoFinalDesarolloApl/app/src/main/res/layout/fragment_configuracion.xml" value="0.3375" />
         <entry key="..\:/Users/luisc/OneDrive/Desktop/Proyecto Final/ProyectoFinalDesarolloApl/app/src/main/res/layout/fragment_empleado.xml" value="0.1875" />
@@ -25,6 +28,8 @@
         <entry key="..\:/Users/luisc/OneDrive/Desktop/Proyecto Final/ProyectoFinalDesarolloApl/app/src/main/res/layout/fragment_home.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/luisc/OneDrive/Desktop/Proyecto Final/ProyectoFinalDesarolloApl/app/src/main/res/layout/fragment_money.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/luisc/OneDrive/Desktop/Proyecto Final/ProyectoFinalDesarolloApl/app/src/main/res/layout/fragment_notificacion.xml" value="0.33" />
+        <entry key="..\:/Users/luisc/OneDrive/Desktop/Proyecto Final/ProyectoFinalDesarolloApl/app/src/main/res/layout/list_view_empleado.xml" value="0.2604166666666667" />
+        <entry key="..\:/Users/luisc/OneDrive/Desktop/Proyecto Final/ProyectoFinalDesarolloApl/app/src/main/res/layout/top_layout.xml" value="0.2595108695652174" />
         <entry key="..\:/Users/starling.perez/OneDrive - GRUPO BABEL/Escritorio/ProyectoFinalDesarolloApl/app/src/main/res/drawable/ic_dinero.xml" value="0.18888888888888888" />
         <entry key="..\:/Users/starling.perez/OneDrive - GRUPO BABEL/Escritorio/ProyectoFinalDesarolloApl/app/src/main/res/layout/activity_login.xml" value="0.17753623188405798" />
         <entry key="..\:/Users/starling.perez/OneDrive - GRUPO BABEL/Escritorio/ProyectoFinalDesarolloApl/app/src/main/res/layout/activity_login_registro.xml" value="0.14356884057971014" />

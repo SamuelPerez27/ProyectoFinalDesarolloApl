@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".Dudas.dudas"
+            android:exported="false" />
+        <activity
             android:name=".Cuentas.CuentasPagar"
             android:exported="false" />
         <activity
