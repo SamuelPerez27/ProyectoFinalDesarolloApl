@@ -1,18 +1,17 @@
 package com.example.finapp.Cuentas;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,40 +25,72 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class CuentasPagar extends AppCompatActivity {
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
+public class CuentasPagar extends Fragment {
 
     //Variablidad
     ListView listviewCuentas;
-    ProgressDialog progressDialog;
-    int[] id_cuenta, id_empresa,id_metodo_pago, valor, id_cliente, id_tipocuenta;
+    int[] id_cuenta, id_empresa, id_metodo_pago, valor, id_cliente, id_tipocuenta;
     String[] empresa_nombre, metodo_pago_nombre, concepto, fecha, nombre_cliente, nombre_tipocuenta;
-    Button BtnCrear;
+    TextView btnCrear;
 
     // Url apis
     String Selectcuentascorar = "https://teorganizo1.000webhostapp.com/cuentas/selectcuentaspagar.php";
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cuentas_pagar);
 
-        //Inicializar
-        try {
-            listviewCuentas = findViewById(R.id.listCuentaspagar);
-        }
-        catch (Exception er){
-            Toast.makeText(getApplicationContext(), er.toString(), Toast.LENGTH_LONG).show();
-        }
-
-        select_cuentascobrar();
+    public CuentasPagar() {
+        // Required empty public constructor
     }
-    public void select_cuentascobrar(){
 
+    public static CuentasPagar newInstance(String param1, String param2) {
+        CuentasPagar fragment = new CuentasPagar();
+        Bundle args = new Bundle();
+        // args.putString(ARG_PARAM1, param1);
+        //   args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null) {
+            //  mParam1 = getArguments().getString(ARG_PARAM1);
+            //  mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_cuentas_pagar, container, false);
+
+        listviewCuentas = view.findViewById(R.id.listCuentaspagar);
+        btnCrear.setOnClickListener(v -> {
+            agregar_Cuentas agregar_cuentas = new agregar_Cuentas();
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_layout, agregar_cuentas, "aCu")
+                    .commit();
+        });
+        select_cuentascobrar();
+        return view;
+    }
+
+    public void select_cuentascobrar() {
+
+        SweetAlertDialog pDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Obteniendo la data, por favor espera...");
+        pDialog.show();
         StringRequest request_select_cuentas = new StringRequest(Request.Method.POST, Selectcuentascorar,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
-                        try{
+                        try {
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray jsonArray = jsonObject.getJSONArray("datos");
 
@@ -79,7 +110,7 @@ public class CuentasPagar extends AppCompatActivity {
                                 nombre_tipocuenta = new String[jsonArray.length()];
 
                                 for (int i = 0; i < jsonArray.length(); i++) {
-                                    //  progressDialog.dismiss();
+                                    pDialog.dismiss();
                                     JSONObject object = jsonArray.getJSONObject(i);
 
                                     id_cuenta[i] = object.getInt("id_cuenta");
@@ -99,29 +130,32 @@ public class CuentasPagar extends AppCompatActivity {
                                     CuentasPagar.adapter adapterclass = new CuentasPagar.adapter();
                                     listviewCuentas.setAdapter(adapterclass);
                                 }
+                            } catch (Exception er) {
+                                new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                                        .setTitleText("Oops...")
+                                        .setContentText(er.toString())
+                                        .show();
                             }
-                            catch (Exception er){
-                                Toast.makeText(getApplicationContext(), er.toString(), Toast.LENGTH_LONG).show();
-                            }
-                        }
-                        catch (JSONException e){
-                            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                                    .setTitleText("Oops...")
+                                    .setContentText(e.getMessage())
+                                    .show();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //   Toast.makeText(MainActivity2.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Oops...")
+                        .setContentText(error.getMessage())
+                        .show();
             }
         });
 
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(request_select_cuentas);
 
-    }
-
-    public void agregarCuenta(View view) {
-        startActivity(new Intent(getApplicationContext(), agregar_Cuentas.class));
     }
 
     private class adapter extends BaseAdapter {
@@ -145,25 +179,36 @@ public class CuentasPagar extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             //Variables
 
-            TextView valortv, conceptotv, fechatv;
-            Button editarCuentaCobrar, eliminarCuentaCobrar;
+            TextView valortv, conceptotv;
+            ImageButton txt_edit, txt_delete, txt_view;
+            CardView cardview;
 
-            convertView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.cuentapagar_template, parent, false);
+            convertView = LayoutInflater.from(getActivity()).inflate(R.layout.list_view_empleado, parent, false);
 
-            valortv = convertView.findViewById(R.id.valorCliente);
-            conceptotv = convertView.findViewById(R.id.conceptoCliente);
-            fechatv = convertView.findViewById(R.id.fechaCliente);
+            txt_edit = convertView.findViewById(R.id.txt_edti);
+            txt_view = convertView.findViewById(R.id.txt_view);
+            txt_delete = convertView.findViewById(R.id.txt_delete);
+            cardview = convertView.findViewById(R.id.cardview);
 
-            editarCuentaCobrar = convertView.findViewById(R.id.editarCuentaCobrar);
-            eliminarCuentaCobrar = convertView.findViewById(R.id.eliminarCuentaCobrar);
+            valortv = convertView.findViewById(R.id.cargoEmpleado);
+            conceptotv = convertView.findViewById(R.id.nombreEmpleado);
+
+            cardview.setOnClickListener(v -> {
+                //background random color
+                txt_delete.setVisibility(View.VISIBLE);
+                txt_edit.setVisibility(View.VISIBLE);
+                txt_view.setVisibility(View.VISIBLE);
+                valortv.setVisibility(View.GONE);
+                conceptotv.setVisibility(View.GONE);
+            });
 
             //Metodo Editar cliente
-            editarCuentaCobrar.setOnClickListener(new View.OnClickListener() {
+            txt_edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     try {
                         Bundle bundle = new Bundle();
-                        bundle.putInt("id_cuenta",  id_cuenta[position]);
+                        bundle.putInt("id_cuenta", id_cuenta[position]);
                         bundle.putInt("id_empresa", id_empresa[position]);
                         bundle.putInt("id_metodo_pago", id_metodo_pago[position]);
                         bundle.putInt("valor", valor[position]);
@@ -174,25 +219,30 @@ public class CuentasPagar extends AppCompatActivity {
                         bundle.putString("nombreMetodoPago", metodo_pago_nombre[position]);
 
 
+                        editar_Cuentas editar_cuentas_ = new editar_Cuentas();
+                        editar_cuentas_.setArguments(bundle);
 
-                        Intent intent = new Intent(getApplicationContext(), editar_Cuentas_Cobrar.class);
-                        intent.putExtra("envio", bundle);
-                        startActivity(intent);
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.frame_layout, editar_cuentas_, "edCuCo")
+                                .commit();
 
-                    }
-                    catch (Exception er){
-                        Toast.makeText(getApplicationContext(), er.toString(), Toast.LENGTH_SHORT).show();
+                    } catch (Exception er) {
+                        new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("Oops...")
+                                .setContentText(er.toString())
+                                .show();
                     }
                 }
             });
 
             //Metodo eliminar
-            eliminarCuentaCobrar.setOnClickListener(new View.OnClickListener() {
+            txt_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     try {
                         Bundle bundle = new Bundle();
-                        bundle.putInt("id_cuenta",  id_cuenta[position]);
+                        bundle.putInt("id_cuenta", id_cuenta[position]);
                         bundle.putInt("id_empresa", id_empresa[position]);
                         bundle.putInt("id_metodo_pago", id_metodo_pago[position]);
                         bundle.putInt("valor", valor[position]);
@@ -200,13 +250,19 @@ public class CuentasPagar extends AppCompatActivity {
                         bundle.putString("fecha", fecha[position]);
                         bundle.putInt("id_cliente", id_cliente[position]);
 
-                        Intent intent = new Intent(getApplicationContext(), eliminarCuentaCobrar.class);
-                        intent.putExtra("envio", bundle);
-                        startActivity(intent);
+                        eliminarCuentaCobrar eliminarCuentaCobrar = new eliminarCuentaCobrar();
+                        eliminarCuentaCobrar.setArguments(bundle);
 
-                    }
-                    catch (Exception er){
-                        Toast.makeText(getApplicationContext(), er.toString(), Toast.LENGTH_SHORT).show();
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.frame_layout, eliminarCuentaCobrar, "elCuCo")
+                                .commit();
+
+                    } catch (Exception er) {
+                        new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("Oops...")
+                                .setContentText(er.toString())
+                                .show();
                     }
                 }
             });
@@ -214,14 +270,15 @@ public class CuentasPagar extends AppCompatActivity {
 
             try {
 
-                valortv.setText(  valor[position] + ""   );
-                conceptotv.setText(  concepto[position]);
-                fechatv.setText(fecha[position] +"");
-            }
-            catch (Exception er){
-                Toast.makeText(getApplicationContext(), er.toString(), Toast.LENGTH_SHORT).show();
-            }
+                valortv.setText(valor[position] + "");
+                conceptotv.setText(concepto[position] + " " + fecha[position]);
 
+            } catch (Exception er) {
+                new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Oops...")
+                        .setContentText(er.toString())
+                        .show();
+            }
 
             return convertView;
         }

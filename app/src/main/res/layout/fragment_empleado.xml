@@ -5,8 +5,8 @@
     android:id="@+id/fragment_empleado"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".empleado.EmpleadoFragment"
-    android:background="@drawable/fondo">
+    android:background="@drawable/fondo"
+    tools:context=".empleado.EmpleadoFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,8 +18,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
@@ -110,15 +110,17 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="0.1"
                 android:orientation="horizontal">
 
+
                 <ListView
                     android:id="@+id/list_view_empleado"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:divider="#E6DCCE"
                     android:dividerHeight="1px"></ListView>
             </LinearLayout>
@@ -126,14 +128,15 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:gravity="center_vertical"
+                android:layout_weight="0"
+                android:gravity="center_horizontal"
                 android:orientation="horizontal"
-                android:translationZ="1dp"
-                >
+                android:translationZ="1dp">
 
                 <RelativeLayout
                     android:layout_width="180dp"

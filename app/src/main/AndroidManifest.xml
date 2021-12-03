@@ -18,7 +18,7 @@
             android:name=".Cuentas.CuentasPagar"
             android:exported="false" />
         <activity
-            android:name=".Cuentas.editar_Cuentas_Cobrar"
+            android:name=".Cuentas.editar_Cuentas"
             android:exported="false" />
         <activity
             android:name=".Cuentas.agregar_Cuentas"

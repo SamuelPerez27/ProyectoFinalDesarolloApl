@@ -87,7 +87,7 @@ public class Login extends AppCompatActivity {
                         contraseña.setText("");
                         nombre.setText("");
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        Toast.makeText(Login.this, "Bienvenido" + " " + str_usuario, Toast.LENGTH_SHORT).show();
+
                     }
                     else{
                         pDialogError.setContentText("Usuario, contraseña o empresa incorrectos").show();

@@ -2,6 +2,7 @@ package com.example.finapp.Cuentas;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -22,18 +23,20 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.finapp.R;
+import com.example.finapp.Tools;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 public class CuentasFragment extends Fragment {
 
     //Variablidad
     ListView listviewCuentas;
-    ProgressDialog progressDialog;
-    int[] id_cuenta, id_empresa,id_metodo_pago, valor, id_cliente, id_tipocuenta;
+    int[] id_cuenta, id_empresa, id_metodo_pago, valor, id_cliente, id_tipocuenta;
     String[] empresa_nombre, metodo_pago_nombre, concepto, fecha, nombre_cliente, nombre_tipocuenta;
 
 
@@ -70,18 +73,21 @@ public class CuentasFragment extends Fragment {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_money, container, false);
-        Button btnCobrar = (Button) view.findViewById(R.id.cobrar);
-        Button btnPagar = (Button) view.findViewById(R.id.pagar);
+        TextView btnCobrar = view.findViewById(R.id.cobrar);
+        TextView btnPagar = view.findViewById(R.id.pagar);
         listviewCuentas = view.findViewById(R.id.listCuentasGeneral);
         btnCobrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), CuentasCobrar.class));
+                CuentasCobrar cuentasCobrar = new CuentasCobrar();
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.frame_layout, cuentasCobrar, "cuC")
+                        .commit();
             }
 
 
@@ -90,24 +96,35 @@ public class CuentasFragment extends Fragment {
         btnPagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), CuentasPagar.class));
+                CuentasPagar cuentasPagar = new CuentasPagar();
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.frame_layout, cuentasPagar, "cuP")
+                        .commit();
             }
         });
 
         this.select_cuentas();
 
+        Tools.setSystemBarLight(getActivity());
+        Tools.setSystemBarColor(getActivity(), R.color.white);
+
         return view;
 
     }
 
-    public void select_cuentas(){
+    public void select_cuentas() {
 
+        SweetAlertDialog pDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Obteniendo la data, por favor espera...");
+        pDialog.show();
         StringRequest request_select_cuentas = new StringRequest(Request.Method.POST, Selectgeneral,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
-                        try{
+                        try {
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray jsonArray = jsonObject.getJSONArray("datos");
 
@@ -127,7 +144,7 @@ public class CuentasFragment extends Fragment {
                                 nombre_tipocuenta = new String[jsonArray.length()];
 
                                 for (int i = 0; i < jsonArray.length(); i++) {
-                                    //  progressDialog.dismiss();
+                                    pDialog.dismiss();
                                     JSONObject object = jsonArray.getJSONObject(i);
 
                                     id_cuenta[i] = object.getInt("id_cuenta");
@@ -147,23 +164,30 @@ public class CuentasFragment extends Fragment {
                                     CuentasFragment.adapter adapterclass = new CuentasFragment.adapter();
                                     listviewCuentas.setAdapter(adapterclass);
                                 }
+                            } catch (Exception er) {
+                                new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                                        .setTitleText("Oops...")
+                                        .setContentText(er.toString())
+                                        .show();
                             }
-                            catch (Exception er){
-                                Toast.makeText(getContext(), er.toString(), Toast.LENGTH_LONG).show();
-                            }
-                        }
-                        catch (JSONException e){
-                            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                                    .setTitleText("Oops...")
+                                    .setContentText(e.getMessage())
+                                    .show();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //   Toast.makeText(MainActivity2.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Oops...")
+                        .setContentText(error.getMessage())
+                        .show();
             }
         });
 
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(request_select_cuentas);
 
     }
@@ -189,26 +213,22 @@ public class CuentasFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             //Variables
 
-            TextView valortv, conceptotv, fechatv;
+            TextView valortv, conceptotv;
 
 
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.cuentatemplate, parent, false);
+            convertView = LayoutInflater.from(getActivity()).inflate(R.layout.cuentatemplate, parent, false);
 
-            valortv = convertView.findViewById(R.id.valorGeneral);
-            conceptotv = convertView.findViewById(R.id.conceptoGeneral);
-            fechatv = convertView.findViewById(R.id.fechaGeneral);
-
-
-
+            valortv = convertView.findViewById(R.id.cargoEmpleado);
+            conceptotv = convertView.findViewById(R.id.nombreEmpleado);
 
             try {
-
-                valortv.setText(  valor[position] + ""   );
-                conceptotv.setText(  concepto[position]);
-                fechatv.setText(fecha[position] +"");
-            }
-            catch (Exception er){
-                Toast.makeText(getContext(), er.toString(), Toast.LENGTH_SHORT).show();
+                valortv.setText(valor[position] + "");
+                conceptotv.setText(concepto[position] + " " + fecha[position]);
+            } catch (Exception er) {
+                new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Oops...")
+                        .setContentText(er.toString())
+                        .show();
             }
 
 

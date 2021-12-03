@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -85,10 +86,12 @@ public class EmpleadoFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_empleado, container, false);
         listViewEmpleados = view.findViewById(R.id.list_view_empleado);
+
         if (!paso){
             select_empleado();
             paso=true;
         }
+
         usuario = view.findViewById(R.id.usuario);
         usuario.setText(Login.str_usuario);
 
@@ -100,7 +103,6 @@ public class EmpleadoFragment extends Fragment {
                 Toast.makeText(getActivity(), "jjj", Toast.LENGTH_LONG).show();
             }
         });
-        Toast.makeText(getActivity(), "HOLA", Toast.LENGTH_LONG).show();
 
         Tools.setSystemBarLight(getActivity());
         Tools.setSystemBarColor(getActivity(),R.color.white);
@@ -140,9 +142,9 @@ public class EmpleadoFragment extends Fragment {
 
                                 Empleado_Modelo.empleado_list.add(empleado);
                             }
-                            AdapterEmpleado adapterEmpleado = new AdapterEmpleado();
-                            listViewEmpleados.setAdapter(adapterEmpleado);
+                                AdapterEmpleado adapterEmpleado = new AdapterEmpleado();
 
+                                listViewEmpleados.setAdapter(adapterEmpleado);
                         }
                         catch (JSONException e){
                             Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();

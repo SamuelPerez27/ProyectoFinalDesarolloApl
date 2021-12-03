@@ -9,7 +9,10 @@ import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.finapp.Cliente.ClienteFragment;
 import com.example.finapp.Cuentas.CuentasFragment;
 import com.example.finapp.Estadisticas.GraficoFragment;
+import com.example.finapp.Login.Login;
 import com.example.finapp.empleado.EmpleadoFragment;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                .setTitleText("Bienvenido/a" + " " + Login.str_usuario)
+                .show();
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
 

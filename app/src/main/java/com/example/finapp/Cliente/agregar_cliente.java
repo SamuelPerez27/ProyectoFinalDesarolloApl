@@ -1,12 +1,18 @@
 package com.example.finapp.Cliente;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -20,117 +26,170 @@ import com.example.finapp.Login.Login;
 import com.example.finapp.Login.Login_registro;
 import com.example.finapp.MainActivity;
 import com.example.finapp.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class agregar_cliente extends AppCompatActivity {
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
-    EditText cedulaCliente, nombreCliente, apellidoCliente, empresaCliente;
-    int id_empresa, cedulaNewCliente;
-    String nombreEmpresa, nombreNewCliente, apellidoNewCliente;
+public class agregar_cliente extends Fragment {
+
+    TextInputEditText cedulaCliente, nombreCliente, apellidoCliente, empresaCliente;
+    int id_empresa;
+    String nombreEmpresa, nombreNewCliente, apellidoNewCliente, cedulaNewCliente;
+    TextView btnAñadir, btnRegresar, usuario;
+
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    private String mParam1;
+    private String mParam2;
 
 
     //Api
     String insert = "https://teorganizo1.000webhostapp.com/cliente/insert.php";
 
+    public agregar_cliente() {
+
+    }
+
+    public static agregar_cliente newInstance(String param1, String param2) {
+        agregar_cliente fragment = new agregar_cliente();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agregar_cliente);
 
-        cedulaCliente = findViewById(R.id.cedulaCliente);
-        nombreCliente = findViewById(R.id.nombreCliente);
-        apellidoCliente = findViewById(R.id.apellidoCliente);
-        empresaCliente = findViewById(R.id.empresaCliente);
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            id_empresa = bundle.getInt("id_empresa");
+            nombreEmpresa = bundle.getString("nombreEmpresa");
+        }
+    }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        Bundle bundle = getIntent().getBundleExtra("envio");
-        id_empresa = bundle.getInt("id_empresa");
-        nombreEmpresa = bundle.getString("nombreEmpresa");
+        View view = inflater.inflate(R.layout.activity_agregar_cliente, container, false);
+        cedulaCliente = view.findViewById(R.id.cedulaCliente);
+        nombreCliente = view.findViewById(R.id.nombreCliente);
+        apellidoCliente = view.findViewById(R.id.apellidoCliente);
+        empresaCliente = view.findViewById(R.id.empresaCliente);
+        btnAñadir = view.findViewById(R.id.btnAñadir);
+        btnRegresar = view.findViewById(R.id.btnRegresar);
+        usuario = view.findViewById(R.id.usuario);
+        usuario.setText(Login.str_usuario);
 
-
+        regresar();
+        insertar();
 
         empresaCliente.setText(nombreEmpresa);
         empresaCliente.setFocusable(false);
+        return view;
     }
 
-    public void regresar(View view) {
-
-        limpiador();
-        Intent intent = new Intent(this, ClienteFragment.class );
-        startActivity(intent);
+    public void regresar() {
+        btnRegresar.setOnClickListener(v -> {
+            ClienteFragment clienteFragment = new ClienteFragment();
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_layout, clienteFragment, "cli")
+                    .commit();
+        });
     }
 
-    public void insertar(View view) {
+    public void insertar() {
+        btnAñadir.setOnClickListener(v -> {
+            SweetAlertDialog pDialogError = new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                    .setTitleText("Oops...");
+
+            if (nombreCliente.getText().toString().equals("")) {
+                pDialogError.setContentText("Debe ingresar el nombre del cliente").show();
+            } else if (apellidoCliente.getText().toString().equals("")) {
+                pDialogError.setContentText("Debe ingresar el apellido del cliente").show();
+            } else if (cedulaCliente.getText().toString().equals("")) {
+                pDialogError.setContentText("Debe ingresar la cedula del cliente").show();
+            } else {
+
+                SweetAlertDialog pDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
+                pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                pDialog.setTitleText("Se esta creando el nuevo cliente, por favor espera...");
+                pDialog.show();
+
+                //Tomando valores
+                nombreNewCliente = nombreCliente.getText().toString().trim();
+                apellidoNewCliente = apellidoCliente.getText().toString().trim();
+                cedulaNewCliente = cedulaCliente.getText().toString().trim();
 
 
-        if(nombreCliente.getText().toString().equals("")){
-            Toast.makeText(this, "Debe ingrasar el nombre del Cliente", Toast.LENGTH_SHORT).show();
-        }
-        else if (apellidoCliente.getText().toString().equals("")){
-            Toast.makeText(this, "Debe ingrasar el apellido del Cliente", Toast.LENGTH_SHORT).show();
-        }
-        else if (cedulaCliente.getText().toString().equals("")){
-            Toast.makeText(this, "Debe ingrasar la cedula del Cliente", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setMessage("Se esta creando el nuevo cliente, por favor espera...");
-            progressDialog.show();
+                StringRequest request = new StringRequest(Request.Method.POST, insert, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        pDialog.dismiss();
 
-            //Tomando valores
-            nombreNewCliente = nombreCliente.getText().toString().trim();
-            apellidoNewCliente = apellidoCliente.getText().toString().trim();
-            cedulaNewCliente = cedulaCliente.getInputType();
+                        if (response.equalsIgnoreCase("datos insertados")) {
 
+                            limpiador();
 
-            StringRequest request = new StringRequest(Request.Method.POST, insert, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    progressDialog.dismiss();
+                            ClienteFragment clienteFragment = new ClienteFragment();
 
-                    if(response.equalsIgnoreCase("datos insertados")){
+                            getActivity().getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.frame_layout, clienteFragment, "cli")
+                                    .commit();
+                            new SweetAlertDialog(getActivity(), SweetAlertDialog.SUCCESS_TYPE)
+                                    .setTitleText("Se ha registrado el nuevo cliente correctamente")
+                                    .show();
+                        } else {
+                            new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                                    .setTitleText("Oops...")
+                                    .setContentText(response)
+                                    .show();
+                        }
 
-                        limpiador();
-                        startActivity(new Intent(getApplicationContext(), ClienteFragment.class));
-                        Toast.makeText(agregar_cliente.this, "Se ha registrado el nuevo cliente correctamente"  , Toast.LENGTH_SHORT).show();
                     }
-                    else{
-                        Toast.makeText(agregar_cliente.this, response, Toast.LENGTH_SHORT).show();
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        pDialog.dismiss();
+                        new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("Oops...")
+                                .setContentText("Something went wrong!")
+                                .show();
                     }
-
                 }
-            },new Response.ErrorListener(){
 
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    progressDialog.dismiss();
-                    Toast.makeText(agregar_cliente.this, error.getMessage().toString(), Toast.LENGTH_SHORT).show();
-                }
+                ) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("cedula", cedulaNewCliente);
+                        params.put("nombre", nombreNewCliente);
+                        params.put("apellido", apellidoNewCliente);
+                        params.put("id_empresa", id_empresa + "");
+
+                        return params;
+
+                    }
+                };
+
+                RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+                requestQueue.add(request);
             }
-
-            ){
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String,String> params = new HashMap<String, String>();
-                    params.put("cedula", cedulaNewCliente+"");
-                    params.put("nombre", nombreNewCliente);
-                    params.put("apellido", apellidoNewCliente);
-                    params.put("id_empresa", id_empresa +"");
-
-                    return params;
-
-                }
-            };
-
-            RequestQueue requestQueue = Volley.newRequestQueue(agregar_cliente.this);
-            requestQueue.add(request);
-
-        }
+        });
     }
 
-    public void limpiador(){
+    public void limpiador() {
         nombreCliente.setText("");
         apellidoCliente.setText("");
         cedulaCliente.setText("");

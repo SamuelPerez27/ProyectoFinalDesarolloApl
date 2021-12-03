@@ -39,14 +39,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/cargoEmpleado"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
+
 
             <ImageButton
                 android:id="@+id/txt_edti"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#FF4CAF50"
+                android:background="@drawable/custom_verde_button"
                 android:src="@drawable/ic_baseline_edit_24"
                 android:visibility="gone" />
 
@@ -54,8 +56,9 @@
                 android:id="@+id/txt_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
                 android:layout_weight="1"
-                android:background="#00BCD4"
+                android:background="@drawable/custom_azul_button"
                 android:src="@drawable/ic_baseline_preview_24"
                 android:visibility="gone" />
 
@@ -64,9 +67,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#FA0303"
+                android:background="@drawable/custom_rojo_button"
                 android:src="@drawable/ic_baseline_delete_24"
                 android:visibility="gone" />
+
         </LinearLayout>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

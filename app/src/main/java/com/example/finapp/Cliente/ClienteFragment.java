@@ -1,10 +1,13 @@
 package com.example.finapp.Cliente;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -12,9 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.finapp.Login.Login;
 import com.example.finapp.MainActivity;
 import com.example.finapp.R;
 
@@ -35,11 +40,14 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.finapp.Login.Login_registro;
 import com.example.finapp.R;
+import com.example.finapp.Tools;
 import com.example.finapp.estados.estado_clase_modelo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +66,8 @@ public class ClienteFragment extends Fragment {
     String total;
     cliente_modelo cliente_modelo;
     ListView listviewCliente;
-    Button añadir;
+    TextView añadir, usuario;
+    Boolean pasar = false;
 
 
     public int[] id, cedula, id_empresa;
@@ -117,32 +126,33 @@ public class ClienteFragment extends Fragment {
         total_cliente = view.findViewById(R.id.total_cliente);
         listviewCliente = view.findViewById(R.id.listCLientes);
         añadir = view.findViewById(R.id.anadirCliente);
+        usuario = view.findViewById(R.id.usuario);
+        usuario.setText(Login.str_usuario);
 
 
         //Llamo el metodo que se encarga de obtener el total de empleados
-        //select_estado();
         select_cliente();
-        //Asignacion
-        total_cliente.setText(cliente_modelo.totalCliente);
-
-        añadir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               Intent agregar = new Intent(getActivity(), agregar_cliente.class);
-               Bundle bundle = new Bundle();
-               bundle.putInt("id_empresa", id_empresa[0]);
-               bundle.putString("nombreEmpresa", nombreEmpresa[0]);
-               agregar.putExtra("envio", bundle);
-               startActivity(agregar);
 
 
-            }
+        añadir.setOnClickListener(v -> {
+            agregar_cliente agregar_cliente = new agregar_cliente();
+            Bundle bundle = new Bundle();
+            bundle.putInt("id_empresa", id_empresa[0]);
+            bundle.putString("nombreEmpresa", nombreEmpresa[0]);
+            agregar_cliente.setArguments(bundle);
+
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_layout, agregar_cliente, "cli")
+                    .commit();
         });
         select_estado();
 
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Obteniendo la data, por favor espera...");
-        //   progressDialog.show();
+        //Asignacion
+        total_cliente.setText(cliente_modelo.totalCliente);
+
+        Tools.setSystemBarLight(getActivity());
+        Tools.setSystemBarColor(getActivity(), R.color.white);
 
         return view;
     }
@@ -150,6 +160,12 @@ public class ClienteFragment extends Fragment {
 
     //Selecciona los nombres de los estados
     public void select_estado() {
+
+
+        SweetAlertDialog pDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Obteniendo la data, por favor espera...");
+        pDialog.show();
 
         StringRequest request_select_estado = new StringRequest(Request.Method.POST, selectTcliente,
                 new Response.Listener<String>() {
@@ -161,19 +177,25 @@ public class ClienteFragment extends Fragment {
                             JSONArray jsonArray = jsonObject.getJSONArray("cliente");
 
                             for (int i = 0; i < jsonArray.length(); i++) {
-                                progressDialog.dismiss();
+                                pDialog.dismiss();
                                 JSONObject object = jsonArray.getJSONObject(i);
                                 total = object.getString("total");
                                 cliente_modelo.totalCliente = total;
                             }
                         } catch (JSONException e) {
-                            Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
+                            new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                                    .setTitleText("Oops...")
+                                    .setContentText(e.toString())
+                                    .show();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //   Toast.makeText(MainActivity2.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Oops...")
+                        .setContentText(error.getMessage())
+                        .show();
             }
         });
 
@@ -210,20 +232,26 @@ public class ClienteFragment extends Fragment {
                                     nombre[i] = object.getString("nombre");
                                     apellido[i] = object.getString("apellido");
                                     id_empresa[i] = object.getInt("id_empresa");
-                                    nombreEmpresa[i]  = object.getString("nombreEmpresa");
+                                    nombreEmpresa[i] = object.getString("nombreEmpresa");
 
                                 }
 
                                 adapter adapterclass = new adapter();
                                 listviewCliente.setAdapter(adapterclass);
                             } catch (JSONException e) {
-                                Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
+                                new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                                        .setTitleText("Oops...")
+                                        .setContentText(e.toString())
+                                        .show();
                             }
                         }
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    //   Toast.makeText(MainActivity2.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Oops...")
+                            .setContentText(error.getMessage())
+                            .show();
                 }
             });
             RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
@@ -251,46 +279,73 @@ public class ClienteFragment extends Fragment {
             return 0;
         }
 
+        @SuppressLint("ViewHolder")
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             //Variables
 
-            TextView cedulaCliente, nombreCliente, apellidoCliente;
-            Button editarCliente, eliminarCliente;
+            TextView cedulaCliente, nombreCliente;
+            ImageButton txt_edit, txt_delete, txt_view;
+            CardView cardview;
 
-            convertView = LayoutInflater.from(getActivity()).inflate(R.layout.clientetemplate, parent, false);
+            convertView = LayoutInflater.from(getActivity()).inflate(R.layout.list_view_empleado, parent, false);
 
-            cedulaCliente = convertView.findViewById(R.id.cedulaCliente);
-            nombreCliente = convertView.findViewById(R.id.nombreCliente);
-            apellidoCliente = convertView.findViewById(R.id.apellidoCliente);
+            cedulaCliente = convertView.findViewById(R.id.cargoEmpleado);
+            nombreCliente = convertView.findViewById(R.id.nombreEmpleado);
 
-            editarCliente = convertView.findViewById(R.id.editarCliente);
-            eliminarCliente = convertView.findViewById(R.id.eliminarCliente);
+            txt_edit = convertView.findViewById(R.id.txt_edti);
+            txt_view = convertView.findViewById(R.id.txt_view);
+            txt_delete = convertView.findViewById(R.id.txt_delete);
+            cardview = convertView.findViewById(R.id.cardview);
+
+            cardview.setOnClickListener(v -> {
+                if (!pasar) {
+                    //background random color
+                    txt_delete.setVisibility(View.VISIBLE);
+                    txt_edit.setVisibility(View.VISIBLE);
+                    txt_view.setVisibility(View.VISIBLE);
+                    cedulaCliente.setVisibility(View.GONE);
+                    nombreCliente.setVisibility(View.GONE);
+                } else {
+                    //background random color
+                    txt_delete.setVisibility(View.GONE);
+                    txt_edit.setVisibility(View.GONE);
+                    txt_view.setVisibility(View.GONE);
+                    cedulaCliente.setVisibility(View.VISIBLE);
+                    nombreCliente.setVisibility(View.VISIBLE);
+                }
+
+            });
 
             //Metodo Editar cliente
-            editarCliente.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    try {
-                        Bundle bundle = new Bundle();
-                        bundle.putInt("id", id[position]);
-                        bundle.putInt("cedula", cedula[position]);
-                        bundle.putString("nombre", nombre[position]);
-                        bundle.putString("apellido", apellido[position]);
-                        bundle.putInt("id_empresa", id_empresa[position]);
+            txt_edit.setOnClickListener(v -> {
+                try {
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("id", id[position]);
+                    bundle.putInt("cedula", cedula[position]);
+                    bundle.putString("nombre", nombre[position]);
+                    bundle.putString("apellido", apellido[position]);
+                    bundle.putInt("id_empresa", id_empresa[position]);
 
-                        Intent intent = new Intent(getActivity(), com.example.finapp.Cliente.editarCliente.class);
-                        intent.putExtra("envio", bundle);
-                        startActivity(intent);
+                    editarCliente editarCliente = new editarCliente();
 
-                    } catch (Exception er) {
-                        Toast.makeText(getActivity(), er.toString(), Toast.LENGTH_SHORT).show();
-                    }
+                    editarCliente.setArguments(bundle);
+
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.frame_layout, editarCliente, "emp")
+                            .commit();
+
+                } catch (Exception er) {
+                    new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Oops...")
+                            .setContentText(er.toString())
+                            .show();
                 }
             });
 
             //Metodo eliminar
-            eliminarCliente.setOnClickListener(new View.OnClickListener() {
+            txt_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     try {
@@ -301,12 +356,20 @@ public class ClienteFragment extends Fragment {
                         bundle.putString("apellido", apellido[position]);
                         bundle.putInt("id_empresa", id_empresa[position]);
 
-                        Intent intent = new Intent(getActivity(), com.example.finapp.Cliente.eliminarCliente.class);
-                        intent.putExtra("envio", bundle);
-                        startActivity(intent);
+                        eliminarCliente eliminarCliente = new eliminarCliente();
+                        eliminarCliente.setArguments(bundle);
+
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.frame_layout, eliminarCliente, "elcli")
+                                .commit();
+
 
                     } catch (Exception er) {
-                        Toast.makeText(getActivity(), er.toString(), Toast.LENGTH_SHORT).show();
+                        new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("Oops...")
+                                .setContentText(er.toString())
+                                .show();
                     }
                 }
             });
@@ -314,13 +377,14 @@ public class ClienteFragment extends Fragment {
 
             try {
 
-                nombreCliente.setText(nombre[position]);
-                apellidoCliente.setText(apellido[position]);
+                nombreCliente.setText(nombre[position] + " " + apellido[position]);
                 cedulaCliente.setText(cedula[position] + "");
             } catch (Exception er) {
-                Toast.makeText(getActivity(), er.toString(), Toast.LENGTH_SHORT).show();
+                new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("Oops...")
+                        .setContentText(er.toString())
+                        .show();
             }
-
 
             return convertView;
         }

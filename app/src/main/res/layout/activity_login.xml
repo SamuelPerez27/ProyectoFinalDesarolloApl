@@ -55,6 +55,28 @@
 
             <com.google.android.material.textfield.TextInputLayout
 
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:hint="Empresa"
+                app:boxBackgroundColor="#FFFFFF"
+                app:boxStrokeColor="#000000"
+                app:hintTextColor="#000000"
+                app:placeholderTextColor="#000000">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/edificios"
+                    android:fontFamily="@font/poppinsmedium"
+                    android:foregroundTint="#000000" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+
 
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
@@ -99,27 +121,7 @@
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
 
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:hint="Empresa"
-                app:boxBackgroundColor="#FFFFFF"
-                app:boxStrokeColor="#000000"
-                app:hintTextColor="#000000"
-                app:placeholderTextColor="#000000">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/nombre"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/edificios"
-                    android:fontFamily="@font/poppinsmedium"
-                    android:foregroundTint="#000000" />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -225,8 +227,6 @@
             android:onClick="registrar"/>
 
     </LinearLayout>
-
-
 
     <ImageView
         android:id="@+id/imageView2"
