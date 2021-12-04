@@ -59,7 +59,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
-                android:hint="Ingrese la empresa:"
+                android:hint="Ingrese el empresa cliente:"
                 app:boxBackgroundColor="#FFFFFF"
                 app:boxStrokeColor="#000000"
                 app:hintTextColor="#000000"

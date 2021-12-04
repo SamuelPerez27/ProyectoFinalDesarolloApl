@@ -111,7 +111,7 @@
                         android:fontFamily="@font/poppinsbold"
                         android:gravity="center"
                         android:onClick="Anadir"
-                        android:text="Registrar empleado"
+                        android:text="Registrar cliente"
                         android:textColor="#fff"
                         android:textSize="15dp" />
 
