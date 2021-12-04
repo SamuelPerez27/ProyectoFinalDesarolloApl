@@ -143,8 +143,8 @@ public class agregar_Cuentas extends Fragment {
         });
 
         Select_metodopago();
-        select_cliente();
         Select_tipocuenta();
+        select_cliente();
         regresar();
         agregarCuenta();
         return view;

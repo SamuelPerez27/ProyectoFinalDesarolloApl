@@ -9,9 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.finapp.Login.Login;
 import com.example.finapp.R;
+import com.example.finapp.Tools;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -41,6 +44,7 @@ public class GraficoFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    TextView usuario;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -80,6 +84,10 @@ public class GraficoFragment extends Fragment {
         PieChart pieChart1 = (PieChart) view.findViewById(R.id.barChart1);
         this.PieChartVentas(view);
         this.PieChartGastos(view);
+        usuario = view.findViewById(R.id.usuario);
+        usuario.setText(Login.str_usuario);
+        Tools.setSystemBarLight(getActivity());
+        Tools.setSystemBarColor(getActivity(),R.color.white);
         return view;
     }
 
@@ -92,11 +100,12 @@ public class GraficoFragment extends Fragment {
         visitors.add(new PieEntry(30,"2019"));
 
         PieDataSet pieDataSet = new PieDataSet(visitors,"Ventas");
-        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        pieDataSet.setValueTextColor(Color.BLACK);
-        pieDataSet.setValueTextSize(26f);
+        pieDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+        pieDataSet.setValueTextColor(Color.WHITE);
+        pieDataSet.setValueTextSize(20f);
 
         pieChart.setCenterText("Gastos");
+        pieChart.setCenterTextSize(20f);
 
         PieData pieData = new PieData(pieDataSet);
         pieChart.getDescription().setEnabled(false);
@@ -115,11 +124,13 @@ public class GraficoFragment extends Fragment {
         visitors.add(new PieEntry(308,"2019"));
 
         PieDataSet pieDataSet = new PieDataSet(visitors,"Ventas");
-        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        pieDataSet.setValueTextColor(Color.BLACK);
-        pieDataSet.setValueTextSize(26f);
+        pieDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        pieDataSet.setValueTextColor(Color.WHITE);
+
+        pieDataSet.setValueTextSize(20f);
 
         pieChart.setCenterText("Ventas");
+        pieChart.setCenterTextSize(20f);
 
         PieData pieData = new PieData(pieDataSet);
         pieChart.getDescription().setEnabled(false);

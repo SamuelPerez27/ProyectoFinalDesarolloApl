@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,6 +33,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class Login_registro extends AppCompatActivity {
 
@@ -150,9 +153,10 @@ public class Login_registro extends AppCompatActivity {
             Toast.makeText(this, "Debe ingresar un estado", Toast.LENGTH_SHORT).show();
         }
         else {
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setMessage("Se esta creando la empresa, por favor espera...");
-            progressDialog.show();
+            SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+            pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+            pDialog.setTitleText("Se esta creando la empresa, por favor espera...");
+            pDialog.show();
 
             //Tomando valores
             nombreEmpresa_txt = nombreEmpresa.getText().toString().trim();
@@ -164,7 +168,7 @@ public class Login_registro extends AppCompatActivity {
             StringRequest request = new StringRequest(Request.Method.POST, insert, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    progressDialog.dismiss();
+                    pDialog.dismiss();
 
                     if(response.equalsIgnoreCase("datos insertados")){
 
@@ -181,7 +185,7 @@ public class Login_registro extends AppCompatActivity {
 
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    progressDialog.dismiss();
+                    pDialog.dismiss();
                     Toast.makeText(Login_registro.this, error.getMessage().toString(), Toast.LENGTH_SHORT).show();
                 }
             }

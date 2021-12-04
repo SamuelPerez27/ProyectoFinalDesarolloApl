@@ -22,6 +22,7 @@
         <entry key="..\:/Users/alexv/OneDrive - Personal/OneDrive/Desktop/GitHub/ProyectoFinalDesarolloApl/app/src/main/res/layout/activity_agregar_cuentas.xml" value="0.25101214574898784" />
         <entry key="..\:/Users/alexv/OneDrive - Personal/OneDrive/Desktop/GitHub/ProyectoFinalDesarolloApl/app/src/main/res/layout/activity_cuentas_cobrar.xml" value="0.23574144486692014" />
         <entry key="..\:/Users/alexv/OneDrive - Personal/OneDrive/Desktop/GitHub/ProyectoFinalDesarolloApl/app/src/main/res/layout/activity_cuentas_pagar.xml" value="0.16799999999999998" />
+        <entry key="..\:/Users/alexv/OneDrive - Personal/OneDrive/Desktop/GitHub/ProyectoFinalDesarolloApl/app/src/main/res/layout/activity_dudas.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/alexv/OneDrive - Personal/OneDrive/Desktop/GitHub/ProyectoFinalDesarolloApl/app/src/main/res/layout/activity_editar_cliente.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/alexv/OneDrive - Personal/OneDrive/Desktop/GitHub/ProyectoFinalDesarolloApl/app/src/main/res/layout/activity_editar_cuentas_cobrar.xml" value="0.1" />
         <entry key="..\:/Users/alexv/OneDrive - Personal/OneDrive/Desktop/GitHub/ProyectoFinalDesarolloApl/app/src/main/res/layout/activity_eliminar_cliente.xml" value="0.13020833333333334" />
@@ -37,7 +38,7 @@
         <entry key="..\:/Users/alexv/OneDrive - Personal/OneDrive/Desktop/GitHub/ProyectoFinalDesarolloApl/app/src/main/res/layout/fragment_configuracion.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/alexv/OneDrive - Personal/OneDrive/Desktop/GitHub/ProyectoFinalDesarolloApl/app/src/main/res/layout/fragment_empleado.xml" value="0.1" />
         <entry key="..\:/Users/alexv/OneDrive - Personal/OneDrive/Desktop/GitHub/ProyectoFinalDesarolloApl/app/src/main/res/layout/fragment_empleado_edit.xml" value="0.264" />
-        <entry key="..\:/Users/alexv/OneDrive - Personal/OneDrive/Desktop/GitHub/ProyectoFinalDesarolloApl/app/src/main/res/layout/fragment_grafico.xml" value="0.1" />
+        <entry key="..\:/Users/alexv/OneDrive - Personal/OneDrive/Desktop/GitHub/ProyectoFinalDesarolloApl/app/src/main/res/layout/fragment_grafico.xml" value="0.2" />
         <entry key="..\:/Users/alexv/OneDrive - Personal/OneDrive/Desktop/GitHub/ProyectoFinalDesarolloApl/app/src/main/res/layout/fragment_money.xml" value="0.1" />
         <entry key="..\:/Users/alexv/OneDrive - Personal/OneDrive/Desktop/GitHub/ProyectoFinalDesarolloApl/app/src/main/res/layout/list_view_empleado.xml" value="0.264" />
         <entry key="..\:/Users/alexv/OneDrive - Personal/OneDrive/Desktop/GitHub/ProyectoFinalDesarolloApl/app/src/main/res/layout/logintemplate_estado.xml" value="0.22418478260869565" />

@@ -22,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.finapp.Login.Login;
 import com.example.finapp.R;
 import com.example.finapp.Tools;
 
@@ -39,6 +40,7 @@ public class CuentasFragment extends Fragment {
     int[] id_cuenta, id_empresa, id_metodo_pago, valor, id_cliente, id_tipocuenta;
     String[] empresa_nombre, metodo_pago_nombre, concepto, fecha, nombre_cliente, nombre_tipocuenta;
 
+    TextView usuario;
 
     String Selectgeneral = "https://teorganizo1.000webhostapp.com/cuentas/selectgeneral.php";
     private static final String ARG_PARAM1 = "param1";
@@ -80,31 +82,26 @@ public class CuentasFragment extends Fragment {
         TextView btnCobrar = view.findViewById(R.id.cobrar);
         TextView btnPagar = view.findViewById(R.id.pagar);
         listviewCuentas = view.findViewById(R.id.listCuentasGeneral);
-        btnCobrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CuentasCobrar cuentasCobrar = new CuentasCobrar();
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.frame_layout, cuentasCobrar, "cuC")
-                        .commit();
-            }
-
-
+        btnCobrar.setOnClickListener(v -> {
+            CuentasCobrar cuentasCobrar = new CuentasCobrar();
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_layout, cuentasCobrar, "cuC")
+                    .commit();
         });
 
-        btnPagar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CuentasPagar cuentasPagar = new CuentasPagar();
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.frame_layout, cuentasPagar, "cuP")
-                        .commit();
-            }
+        btnPagar.setOnClickListener(v -> {
+            CuentasPagar cuentasPagar = new CuentasPagar();
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_layout, cuentasPagar, "cuP")
+                    .commit();
         });
 
         this.select_cuentas();
+
+        usuario = view.findViewById(R.id.usuario);
+        usuario.setText(Login.str_usuario);
 
         Tools.setSystemBarLight(getActivity());
         Tools.setSystemBarColor(getActivity(), R.color.white);
